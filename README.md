@@ -1,12 +1,4 @@
-# Andela Rails Checkpoint #3
-
-1. Git clone this app and follow the instructions below.
-
-```bash
-git clone git@github.com:andela/checkpoint_rails_worst_app.git
-```
-
-### This is one of the worst performing Rails apps ever.
+# This is one of the worst performing Rails apps ever.
 
 Currently, the home page takes this long to load:
 
@@ -33,30 +25,12 @@ So, **What can we do?**
 
 Well, let's focus on improving the view and the AR querying first!
 
-Complete this tutorial first:
-[Jumpstart Lab Tutorial on Querying](http://tutorials.jumpstartlab.com/topics/performance/queries.html)
-
-# Requirements for this checkpoint
+# What to do with this app
 * add an index to the correct columns
 * implement eager loading vs lazy loading on the right pages.
 * replace Ruby lookups with ActiveRecord methods.
-* fix html_safe issue.
 * page cache or fragment cache the root page.
-* No need for testing, but you need to get the time down to a reasonable time for both pages.
 * The root page needs to implement includes, pagination, and fragment caching.
-
-##### Index some columns. But what should we index?
-
-[great explanation of how to index columns and when](http://tutorials.jumpstartlab.com/topics/performance/queries.html#indices)
-
-Our non-performant app has many opportunities to index. Just look at our associations. There are many foreign keys in our database...
-
-```ruby
-class Article < ActiveRecord::Base
-  belongs_to :author
-  has_many :comments
-end
-```
 
 ##### Ruby vs ActiveRecord
 
@@ -99,27 +73,6 @@ end
 
 Both methods use Ruby methods (sort_by) instead of ActiveRecord. Let's fix that.
 
-##### html_safe makes it unsafe or safe?.
-
-This is why variable and method naming is important.
-
-In the show.html.erb for articles, we have this code
-
-```ruby
-  <% @articles.comments.each do |com| % >
-    <%= com.body.html_safe %>
-  <% end %>
-```
-
-What's wrong with it?
-
-The danger is if comment body are user-generated input...which they are.
-
-See [here](http://stackoverflow.com/questions/4251284/raw-vs-html-safe-vs-h-to-unescape-html)
-
-Understand now? Fix the problem.
-
-
 ##### Caching
 
 Our main view currently takes 4 seconds to load
@@ -129,5 +82,4 @@ Rendered author/index.html.erb within layouts/application (5251.7ms)
 Completed 200 OK in 5269ms (Views: 4313.1ms | ActiveRecord: 955.6ms)
 ```
 
-Let's fix that. Read this:
-[fragment caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching)
+Let's fix that.

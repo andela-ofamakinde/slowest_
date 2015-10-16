@@ -6,7 +6,7 @@
 <h2>Comments section</h2>
 <p>
   <% @article.comments.each do |com| %>
-    <%= com.body.html_safe %>
+    <%= com.body %>
   <% end %>
 </p>
 
