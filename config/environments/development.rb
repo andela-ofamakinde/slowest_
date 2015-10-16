@@ -40,5 +40,6 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.alert = true
     Bullet.bullet_logger = true
+    Bullet.unused_eager_loading_enable = false
   end
 end
