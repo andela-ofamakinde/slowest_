@@ -6,18 +6,23 @@ class Author < ActiveRecord::Base
       Fabricate(:author)
     end
     
-    # first.articles << Article.create(name: "some commenter", body: "some body")
   end
 
-  def self.most_prolific_writer
-    all.sort_by{|a| a.articles.count }.last
-  end
+   scope :with_most_upvoted_article, -> { includes(:articles).order('articles.upvotes asc').last.name }  
 
-  def self.with_most_upvoted_article
-    all.sort_by do |auth|
-      auth.articles.sort_by do |art|
-        art.upvotes
-      end.last
-    end.last.name
-  end
+  scope :most_prolific_writer, -> { order('articles_count asc').last }
+
+  # def self.most_prolific_writer
+  #   all.sort_by{|a| a.articles.count }.last
+  # end
+
+  # def self.with_most_upvoted_article
+  #   all.sort_by do |auth|
+  #     auth.articles.sort_by do |art|
+  #       art.upvotes
+  #     end.last
+  #   end.last.name
+  # end
+
+
 end

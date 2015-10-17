@@ -4,8 +4,8 @@
   <div>Most prolific author: <%= @prolific_author.name %> </div>
   <div>Author with most upvoted article: <%= @author_with_most_upvoted_article %> </div>
   <p style="text-decoration: underline">Five longest article names:</p>
-  <% @five_longest_article_names.each do |name| %>
-    <li> <%= name %> </li>
+  <% @five_longest_article_names.each do |names| %>
+    <li> <%= names.name %> </li>
   <% end %>
 
   <p style="text-decoration: underline">List of all the article names (TOO LONG)</p>
@@ -13,3 +13,5 @@
     <li><%= name %></li>
   <% end %>
 </div>
+
+
